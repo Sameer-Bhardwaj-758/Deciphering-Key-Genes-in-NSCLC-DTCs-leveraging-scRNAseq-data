@@ -137,6 +137,7 @@ topten %>%
 ![top-ten-each-cluster](cluster_top_genes.png)
 ### 7️⃣ **Marker Gene Visualization**
 - Plots marker genes for **cell-type annotation** (`FeaturePlot`).
+- Rename clisters based on their characteristic cell type specific gene expression
 ```r
 DefaultAssay(nsclc) <- "RNA"
 FeaturePlot(nsclc, 
@@ -145,8 +146,14 @@ FeaturePlot(nsclc,
             min.cutoff = "q10", 
             max.cutoff = "q90", 
             cols = c("lightgrey", "blue"))
+new.cluster.ids <- c("Epithelial/Tumor cells", "T Cells", "B Cells", "Macrophages", "Plasma Cells", "Tumor/Mesenchymal-like cells",
+                     "Dendritic Cells", "Mast Cells")
+names(new.cluster.ids) <- levels(nsclc)
+nsclc <- RenameIdents(nsclc, new.cluster.ids)
+DimPlot(nsclc, reduction = "umap", label = TRUE, pt.size = 0.5) + NoLegend()
 ```
 ![Marker_cluster](Rplot08.png)
+![Cluster](Rplot09.png)
 ### 8️⃣ **Extracting Significant DEGs**
 - Finds **significantly upregulated and downregulated genes** (`avg_log2FC > 2` or `< -2`).
 - Saves the results as:
@@ -164,7 +171,8 @@ downregulated_nsclc <- degs %>%
 write.csv(upregulated_nsclc, "Upregulated_nsclc_filtered.csv", row.names = FALSE)
 write.csv(downregulated_nsclc, "Downregulated_nsclc_filtered.csv", row.names = FALSE)
 ```
-
+![downregulated_degs](downregulated_degs.png)
+![upregulated_degs](upregulated_degs.png)
 
 
 ### 10. Gene Ontology (GO) & KEGG Pathway Analysis
