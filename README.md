@@ -1,9 +1,7 @@
-# Deciphering-Key-Genes-in-NSCLC-DTCs-leveraging-scRNAseq-data
+# Deciphering-Key-Genes-in-NSCLC-DTCs-leveraging-scRNAseq-data and network analyses.
 # README
 
-## NSCLC Single-Cell RNA-seq Analysis Pipeline
-
-This pipeline processes and analyzes single-cell RNA sequencing (scRNA-seq) data using Seurat in R. The dataset used is a **non-small cell lung cancer (NSCLC)** sample from 10X Genomics.
+Non-small cell lung cancer (NSCLC) is the most prevalent form of lung cancer and the primary cause of cancer-related mortality worldwide. Understanding its molecular mechanisms requires identifying key gene biomarkers, their regulatory elements, and associated signaling pathways. Therefore, this study aims to discover gene biomarkers for NSCLC diagnosis by leveraging scRNA-seq data, applying bioinformatics techniques, and conducting network analyses. The pipeline followed in this study is explained below.
 
 ## **Dependencies**
 
@@ -55,8 +53,13 @@ nsclc <- subset(nsclc, subset = nFeature_RNA > 200 & nFeature_RNA < 2500 & perce
 
 
 ```
+Before Filtering.
+
 ![VlnPlot-QCmetrics](Rplot01.png)
 ![ScatterPlot-QCmetrics](Rplot.png)
+
+After Filtering.
+
 
 ### 3️⃣ **Normalization & Feature Selection**
 - Normalizes data using **LogNormalization**.
