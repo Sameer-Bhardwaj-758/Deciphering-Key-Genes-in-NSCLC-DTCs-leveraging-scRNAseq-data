@@ -60,6 +60,8 @@ Before Filtering.
 
 After Filtering.
 
+![VlnPlot-QCmetrics](Rplot10.png)
+![ScatterPlot-QCmetrics](Rplot11.png)
 
 ### 3️⃣ **Normalization & Feature Selection**
 - Normalizes data using **LogNormalization**.
