@@ -196,7 +196,8 @@ write.csv(downregulated_nsclc, "Downregulated_nsclc_filtered.csv", row.names = F
 - Identify common hub genes from both MCC and Degree method outputs.
 - Highlight key regulators that play a crucial role in NSCLC DTC biology.
 - Validate findings through literature review or external datasets.
-
+![venn](download.png)
+![MCC](common.png)
 ## Tools & Resources
 - **DEG Analysis:** Seurat2
 - **GO & KEGG Analysis:** WebGestalt
