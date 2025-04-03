@@ -193,14 +193,19 @@ write.csv(downregulated_nsclc, "Downregulated_nsclc_filtered.csv", row.names = F
 - Analyze the PPI network using **CytoHubba** in **Cytoscape**.
 - Identify hub genes using **MCC (Maximal Clique Centrality) and Degree methods**.
 - Compare results from both methods to prioritize key regulatory genes.
+MCC
+
 ![MCC](string_interactions_short.tsv_MCC_top15.png)
+
+DEGREE
+
 ![DEGREE](string_interactions_short.tsv_Degree_top15.png)
 ### 13. Final Key Regulatory Genes
 - Identify common hub genes from both MCC and Degree method outputs.
 - Highlight key regulators that play a crucial role in NSCLC DTC biology.
 - Validate findings through literature review or external datasets.
 ![venn](download.png)
-![MCC](common.png)
+![COMMON](common.png)
 ## Tools & Resources
 - **DEG Analysis:** Seurat2
 - **GO & KEGG Analysis:** WebGestalt
