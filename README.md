@@ -55,6 +55,8 @@ nsclc <- subset(nsclc, subset = nFeature_RNA > 200 & nFeature_RNA < 2500 & perce
 
 
 ```
+![VlnPlot-QCmetrics](Rplot01.png)
+![ScatterPlot-QCmetrics](Rplot.png)
 
 ### 3️⃣ **Normalization & Feature Selection**
 - Normalizes data using **LogNormalization**.
@@ -71,6 +73,7 @@ plot1 <- VariableFeaturePlot(nsclc)
 plot2 <- LabelPoints(plot = plot1, points = top10, repel = TRUE)
 plot1 + plot2
 ```
+![Variable-gene_plot](Rplot02.png)
 ### 4️⃣ **Scaling & Dimensionality Reduction**
 - Scales the data.
 - Runs **PCA** for linear dimensionality reduction.
@@ -89,6 +92,10 @@ DimHeatmap(nsclc, dims = 1:5, cells = 500, balanced = TRUE)
 
 ElbowPlot(nsclc)
 ```
+![PCA](Rplot03.png)
+![PCA](Rplot04.png)
+![PC-Heatmap](Rplot05.png)
+![Elbow-plot](Rplot06.png)
 ### 5️⃣ **Clustering & UMAP Visualization**
 - Finds nearest neighbors.
 - Performs **clustering** (`FindClusters`).
@@ -103,6 +110,7 @@ head(Idents(nsclc), 5)
 nsclc <- RunUMAP(nsclc, dims = 1:15)
 DimPlot(nsclc, reduction = "umap")
 ```
+![Cluster](Rplot07.png)
 ### 6️⃣ **Finding Differentially Expressed Genes (DEGs)**
 - Identifies cluster biomarkers (`FindAllMarkers`).
 - Extracts **top 10 genes per cluster**.
@@ -125,6 +133,8 @@ topten %>%
   print(n = Inf)
 
 ```
+![top-ten](top_ten.png)
+![top-ten-each-cluster](cluster_top_genes.png)
 ### 7️⃣ **Marker Gene Visualization**
 - Plots marker genes for **cell-type annotation** (`FeaturePlot`).
 ```r
@@ -136,6 +146,7 @@ FeaturePlot(nsclc,
             max.cutoff = "q90", 
             cols = c("lightgrey", "blue"))
 ```
+![Marker_cluster](Rplot08.png)
 ### 8️⃣ **Extracting Significant DEGs**
 - Finds **significantly upregulated and downregulated genes** (`avg_log2FC > 2` or `< -2`).
 - Saves the results as:
