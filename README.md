@@ -17,12 +17,22 @@ install.packages("SingleCellExperiment")
 # For monocle3 and SeuratWrappers, also install via GitHub if needed
 # remotes::install_github("cole-trapnell-lab/monocle3", force = TRUE)
 # devtools::install_github("satijalab/seurat-wrappers")
+# Load the libraries
+library(dplyr)
+library(Seurat)
+library(patchwork)
+library(CellChat)
+library(ggplot2)
+library(SingleR)
+library(celldex)
+library(SingleCellExperiment)
+library(monocle3)
+library(SeuratWrappers)
 ```
 
 ## **Dataset**
 
 - **Input**: `20k_NSCLC_DTC_3p_nextgem_Multiplex_count_raw_feature_bc_matrix.h5` (Raw feature-barcode matrix from 10X Genomics)
-- **Output**: CSV files for differentially expressed genes (DEGs)
 
 ## **Pipeline Steps**
 
