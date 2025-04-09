@@ -293,7 +293,7 @@ plot_cells(cds,
 
 ```
   
-### 10. Gene Ontology (GO) & KEGG Pathway Analysis
+### 11 Gene Ontology (GO) & KEGG Pathway Analysis
 - Use **WebGestalt (WEB-based Gene SeT AnaLysis Toolkit)** for functional enrichment analysis.
 - Identify biological processes, molecular functions, and cellular components associated with DEGs.
 - Map DEGs to KEGG pathways to understand their involvement in cancer-related mechanisms.
@@ -304,7 +304,7 @@ plot_cells(cds,
 - Construct a PPI network to visualize interactions between DEGs.
 - Filter interactions based on confidence scores to ensure relevance.
 ![NETWORK](string_hires_image.png)
-### 12. Hub Gene Identification
+### 12 Hub Gene Identification
 - Analyze the PPI network using **CytoHubba** in **Cytoscape**.
 - Identify hub genes using **MCC (Maximal Clique Centrality) and Degree methods**.
 - Compare results from both methods to prioritize key regulatory genes.
@@ -315,14 +315,13 @@ MCC
 DEGREE
 
 ![DEGREE](string_interactions_short.tsv_Degree_top15.png)
-### 13. Final Key Regulatory Genes
+### 13 Final Key Regulatory Genes
 - Identify common hub genes from both MCC and Degree method outputs.
 - Highlight key regulators that play a crucial role in NSCLC DTC biology.
 - Validate findings through literature review or external datasets.
 ![venn](download.png)
 ![COMMON](common.png)
 ## Tools & Resources
-- **DEG Analysis:** Seurat2
 - **GO & KEGG Analysis:** WebGestalt
 - **PPI Network Construction:** STRING Database
 - **Hub Gene Identification:** Cytoscape (CytoHubba Plugin)
