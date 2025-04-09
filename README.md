@@ -70,13 +70,13 @@ nsclc <- subset(nsclc, subset = nFeature_RNA > 200 & nFeature_RNA < 8000 & perce
 ```
 Before Filtering.
 
-![VlnPlot-QCmetrics](Rplot01.png)
-![ScatterPlot-QCmetrics](Rplot03.png)
+![VlnPlot-QCmetrics](Rplot.png)
+![ScatterPlot-QCmetrics](Rplot01.png)
 
 After Filtering.
 
-![VlnPlot-QCmetrics](Rplot.png)
-![ScatterPlot-QCmetrics](Rplot11.png)
+![VlnPlot-QCmetrics](Rplot02.png)
+![ScatterPlot-QCmetrics](Rplot03.png)
 
 ### 3️ **Normalization & Feature Selection**
 - Normalizes data using **LogNormalization**.
