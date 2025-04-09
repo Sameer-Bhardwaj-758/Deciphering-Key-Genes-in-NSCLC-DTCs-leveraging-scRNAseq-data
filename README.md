@@ -196,8 +196,8 @@ write.csv(downregulated_nsclc, "Downregulated_nsclc_filtered.csv", row.names = F
 
 
 ```
-![downregulated_degs](downregulated_degs.png)
-![upregulated_degs](upregulated_degs.png)
+![downregulated_degs](downregulated.png)
+![upregulated_degs](upregulated.png)
 
 ### 9️ Cell-cell communication (CellChat)
 - Create CellChat object using normalized data and SingleR labels.
@@ -265,6 +265,13 @@ netAnalysis_signalingRole_heatmap(cellchat.nsclc, pattern = "incoming")
 netAnalysis_signalingRole_heatmap(cellchat.nsclc)
 
 ```
+![net](Rplot12.png)
+![net](Rplot13.png)
+![net](Rplot14.png)
+![net](Rplot15.png)
+![net](Rplot16.png)
+
+
 ### 10 Trajectory analysis (Monocle3)
 - Convert Seurat object to Monocle3 CDS.
 - Transfer UMAP and clustering info.
@@ -297,37 +304,80 @@ plot_cells(cds,
            label_branch_points = TRUE)
 
 ```
-  
-### 11 Gene Ontology (GO) & KEGG Pathway Analysis
-- Use **WebGestalt (WEB-based Gene SeT AnaLysis Toolkit)** for functional enrichment analysis.
-- Identify biological processes, molecular functions, and cellular components associated with DEGs.
-- Map DEGs to KEGG pathways to understand their involvement in cancer-related mechanisms.
-![GO-KEGG](wg_bar.png)
-![GO-KEGG](wg_bar(1).png)
+![trajectory](Rplot17.png)
+
+### 11 Cluster Profiler to for finding key Biological Processes in which DEGs are involved.
+```r
+
+degs <- read.csv("Upregulated_nsclc_filtered.csv")
+gene_list <- degs$gene  # change this to your actual gene column name
+
+# Run enrichment
+ego <- enrichGO(
+  gene         = gene_list,
+  OrgDb        = org.Hs.eg.db,
+  keyType      = "SYMBOL",
+  ont          = "BP",  # Biological Process
+  pAdjustMethod = "BH",
+  pvalueCutoff  = 0.05,
+  qvalueCutoff  = 0.2
+)
+
+# Load your DEG file (assuming a CSV with a 'gene' column)
+go_df <- as.data.frame(ego)
+
+# View all available processes
+View(go_df)  # or head(go_df$Description)
+
+top_processes <- go_df[order(go_df$p.adjust), ]
+head(top_processes, 10)  # Top 10 most significantly enriched
+
+
+# First convert geneRatio column to numeric for sorting
+gene_ratio <- sapply(strsplit(go_df$GeneRatio, "/"), function(x) as.numeric(x[1]) / as.numeric(x[2]))
+go_df$geneRatioNumeric <- gene_ratio
+
+# Sort by gene ratio
+top_by_ratio <- go_df[order(-go_df$geneRatioNumeric), ]
+head(top_by_ratio, 10)
+
+# Define the migration-relevant descriptions from your top 10
+target_terms <- c(
+  "extracellular matrix organization",
+  "cell-substrate adhesion",
+  "positive regulation of cell adhesion",
+  "chemotaxis",
+  "taxis"
+)
+
+# Get genes involved in those processes
+migration_terms_df <- go_df[go_df$Description %in% target_terms, ]
+genes_for_migration <- unique(unlist(strsplit(migration_terms_df$geneID, "/")))
+
+# If you have a DEGs dataframe already loaded (with a 'gene' column)
+filtered_degs <- degs[degs$gene %in% genes_for_migration, ]
+# Save the filtered DEGs to a CSV file
+write.csv(filtered_degs, file = "migration_related_DEGs.csv", row.names = FALSE)
+
+```
+
+![BP](processes.png)
+
 ### 11. PPI Network Construction
 - Retrieve protein-protein interaction (PPI) data using the **STRING database**.
 - Construct a PPI network to visualize interactions between DEGs.
-- Filter interactions based on confidence scores to ensure relevance.
-![NETWORK](string_hires_image.png)
+  
+![NETWORK](network.png)
 ### 12 Hub Gene Identification
 - Analyze the PPI network using **CytoHubba** in **Cytoscape**.
-- Identify hub genes using **MCC (Maximal Clique Centrality) and Degree methods**.
-- Compare results from both methods to prioritize key regulatory genes.
-MCC
+- Identify hub genes using **MCC (Maximal Clique Centrality) .
 
-![MCC](string_interactions_short.tsv_MCC_top15.png)
 
-DEGREE
+![MCC](mcc.png)
 
-![DEGREE](string_interactions_short.tsv_Degree_top15.png)
-### 13 Final Key Regulatory Genes
-- Identify common hub genes from both MCC and Degree method outputs.
-- Highlight key regulators that play a crucial role in NSCLC DTC biology.
-- Validate findings through literature review or external datasets.
-![venn](download.png)
-![COMMON](common.png)
+
 ## Tools & Resources
-- **GO & KEGG Analysis:** WebGestalt
+
 - **PPI Network Construction:** STRING Database
 - **Hub Gene Identification:** Cytoscape (CytoHubba Plugin)
 
