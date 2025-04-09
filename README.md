@@ -71,11 +71,11 @@ nsclc <- subset(nsclc, subset = nFeature_RNA > 200 & nFeature_RNA < 8000 & perce
 Before Filtering.
 
 ![VlnPlot-QCmetrics](Rplot01.png)
-![ScatterPlot-QCmetrics](Rplot.png)
+![ScatterPlot-QCmetrics](Rplot03.png)
 
 After Filtering.
 
-![VlnPlot-QCmetrics](Rplot10.png)
+![VlnPlot-QCmetrics](Rplot.png)
 ![ScatterPlot-QCmetrics](Rplot11.png)
 
 ### 3️ **Normalization & Feature Selection**
@@ -93,7 +93,7 @@ plot1 <- VariableFeaturePlot(nsclc)
 plot2 <- LabelPoints(plot = plot1, points = top10, repel = TRUE)
 plot1 + plot2
 ```
-![Variable-gene_plot](Rplot02.png)
+![Variable-gene_plot](Rplot04.png)
 ### 4️ **Scaling & Dimensionality Reduction**
 - Scales the data.
 - Runs **PCA** for linear dimensionality reduction.
@@ -112,10 +112,9 @@ DimPlot(nsclc, reduction = "pca") + NoLegend()
 DimHeatmap(nsclc, dims = 1:5, cells = 500, balanced = TRUE)
 ElbowPlot(nsclc)
 ```
-![PCA](Rplot03.png)
-![PCA](Rplot04.png)
-![PC-Heatmap](Rplot05.png)
-![Elbow-plot](Rplot06.png)
+![PCA](Rplot05.png)
+![PC-Heatmap](Rplot06.png)
+![Elbow-plot](Rplot07.png)
 ### 5️⃣ **Clustering & UMAP Visualization**
 - Finds nearest neighbors.
 - Performs **clustering** (`FindClusters`).
@@ -130,7 +129,7 @@ head(Idents(nsclc), 5)
 nsclc <- RunUMAP(nsclc, dims = 1:14)
 DimPlot(nsclc, reduction = "umap")
 ```
-![Cluster](Rplot07.png)
+![Cluster](Rplot08.png)
 ### 6️ **Finding Cluster Biomarkers**
 - Identifies cluster biomarkers (`FindAllMarkers`).
 - Extracts **top 10 genes per cluster**.
@@ -152,8 +151,8 @@ topten %>%
   print(n = Inf)
 
 ```
-![top-ten](top_ten.png)
-![top-ten-each-cluster](cluster_top_genes.png)
+![top-ten](10overall.png)
+![top-ten-each-cluster](10_cluster.png)
 
 ### 7 Cell-type annotation using SingleR
 - Use `HumanPrimaryCellAtlasData` as reference.
@@ -173,7 +172,8 @@ table(nsclc$SingleR.labels, useNA = "always")
 
 ```
 
-
+![cluster](Rplot11.png)
+![cluster](Cellspercluster.png)
 
 ### 8️ **Extracting Significant DEGs**
 - Finds **significantly upregulated and downregulated genes** (`avg_log2FC > 2` or `< -2`).
@@ -193,12 +193,7 @@ downregulated_nsclc <- degs %>%
 write.csv(upregulated_nsclc, "Upregulated_nsclc_filtered.csv", row.names = FALSE)
 write.csv(downregulated_nsclc, "Downregulated_nsclc_filtered.csv", row.names = FALSE)
 
-unique_upregulated_genes <- unique(upregulated_nsclc$gene)
-write.table(unique_upregulated_genes, 
-            "Unique_Upregulated_Genes.txt", 
-            row.names = FALSE, 
-            col.names = FALSE, 
-            quote = FALSE)
+
 
 ```
 ![downregulated_degs](downregulated_degs.png)
