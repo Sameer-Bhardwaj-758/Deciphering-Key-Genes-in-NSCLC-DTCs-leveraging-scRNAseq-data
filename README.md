@@ -197,7 +197,7 @@ write.csv(downregulated_nsclc, "Downregulated_nsclc_filtered.csv", row.names = F
 
 ```
 ![downregulated_degs](downregulated.png)
-![upregulated_degs](upregulated.png)
+![upregulated_degs](upregulattd.png)
 
 ### 9️ Cell-cell communication (CellChat)
 - Create CellChat object using normalized data and SingleR labels.
