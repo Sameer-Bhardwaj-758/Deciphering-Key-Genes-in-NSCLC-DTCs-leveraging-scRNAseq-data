@@ -200,7 +200,7 @@ Downregulated
 ![downregulated_degs](downregulated.png)
 
 Upregulated
-![upregulated_degs](Upregulattd.png)
+![upregulated_degs](Upregulated.png)
 
 ### 9️ Cell-cell communication (CellChat)
 - Create CellChat object using normalized data and SingleR labels.
