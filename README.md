@@ -171,6 +171,7 @@ DimPlot(nsclc, group.by = "SingleR.labels", label = TRUE, repel = TRUE)
 table(nsclc$SingleR.labels, useNA = "always")
 
 ```
+- Epithelial cells detected by cell annotation were exhibiting tumor cell like gene expression profiles. Ex: EPCAM, KRT18, KRT8, KRT19, CDKN2A. These genes are represented in the figure carrying top genes per cluster.
 
 ![cluster](Rplot11.png)
 ![cluster](Cellspercluster.png)
