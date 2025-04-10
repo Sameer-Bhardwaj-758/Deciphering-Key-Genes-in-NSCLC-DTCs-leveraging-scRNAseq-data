@@ -273,6 +273,7 @@ netAnalysis_signalingRole_heatmap(cellchat.nsclc)
 ```
 ![net](Rplot12.png)
 ![net](Rplot13.png)
+![net](signalingpath_cc.png)
 ![net](Rplot14.png)
 ![net](Rplot15.png)
 ![net](Rplot16.png)
