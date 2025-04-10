@@ -197,9 +197,11 @@ write.csv(downregulated_nsclc, "Downregulated_nsclc_filtered.csv", row.names = F
 
 ```
 Downregulated
+
 ![downregulated_degs](downregulated.png)
 
 Upregulated
+
 ![upregulated_degs](Upregulated.png)
 
 ### 9️ Cell-cell communication (CellChat)
