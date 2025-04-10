@@ -312,7 +312,7 @@ plot_cells(cds,
 ```
 ![trajectory](Rplot17.png)
 
-### 11 Cluster Profiler to for finding key Biological Processes in which DEGs are involved.
+### 11 Cluster Profiler for finding key Biological Processes in which DEGs are involved.
 ```r
 
 degs <- read.csv("Upregulated_nsclc_filtered.csv")
